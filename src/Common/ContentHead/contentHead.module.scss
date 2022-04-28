@@ -1,0 +1,13 @@
+.contentHead {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  :global {
+    .ant-divider-horizontal {
+      margin: 1px 0 4px 0;
+    }
+    .ant-divider {
+      border-top: 1px solid rgba(0, 0, 0, 0.6);
+    }
+  }
+}

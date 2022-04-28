@@ -21,16 +21,7 @@ module.exports = {
   rules: {
     semi: 0,
     "@typescript-eslint/no-var-requires": 0,
-    "no-unused-vars": [
-      1,
-      {
-        vars: "all",
-        args: "after-used",
-        ignoreRestSiblings: true,
-        varsIgnorePattern: "^_",
-        argsIgnorePattern: "^_|^err|^ev", // _xxx, err, error, ev, event
-      },
-    ],
+    "@typescript-eslint/no-explicit-any": 0,
     "no-useless-escape": 2,
   },
 };

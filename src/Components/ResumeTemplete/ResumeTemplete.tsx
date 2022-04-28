@@ -1,24 +1,40 @@
 import React from "react";
 import "./resumeTemplete.scss";
-import { Name } from "../Parser/Index";
+import { Name, Phone, Email, Expericence } from "@/Components/Parser/Index";
+import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
+import { ContentHead } from "@/Common/ContentHead/contentHead";
 
-interface Param {
-  editResult: string;
-}
+const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
+  return Object.keys(experience).map((ele) => experience[ele]);
+};
 
-interface Output {
-  name: string;
-}
-
-export const ResumeTemplete: React.FC<any> = (param: Param) => {
-  try {
-    const output: Output = JSON.parse(param.editResult);
-  } catch (e) {
-    console.log(e);
-  }
+export const ResumeTemplete = (props: { editResult: string }) => {
+  const { editResult } = props;
+  const formatEditResult: ResumeType = JSON.parse(editResult);
+  const { name, phone, email, workExperience, education, project } = formatEditResult;
   return (
     <div className="resume-templete">
-      <Name name={5455}></Name>
+      <Name name={name}></Name>
+      <div className="subtitle">
+        <div className="subtitle-left">
+          <Phone phone={phone}></Phone>
+        </div>
+        <div className="subtitle-right">
+          <Email email={email}></Email>
+        </div>
+      </div>
+      <ContentHead contentHead={"教育经历"}></ContentHead>
+      {getExperienceJsx(education).map((ele, index) => (
+        <Expericence experience={ele} key={ele.title + index}></Expericence>
+      ))}
+      <ContentHead contentHead={"工作经历"}></ContentHead>
+      {getExperienceJsx(workExperience).map((ele, index) => (
+        <Expericence experience={ele} key={ele.title + index}></Expericence>
+      ))}
+      <ContentHead contentHead={"工作以外经历"}></ContentHead>
+      {getExperienceJsx(project).map((ele, index) => (
+        <Expericence experience={ele} key={ele.title + index}></Expericence>
+      ))}
     </div>
   );
 };

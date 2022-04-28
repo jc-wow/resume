@@ -1,25 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./editor.scss";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 
-interface Param {
-  editResult: string;
+interface Props {
   setEditResult(value: string): void;
+  editResult: string;
 }
 
-export const LeftEditor: React.FC<any> = (param: Param) => {
-  const changeInput: any = (value: string, event: any) => {
-    param.setEditResult(JSON.stringify(value, null, "\t"));
+export const LeftEditor = (props: Props) => {
+  const { editResult, setEditResult } = props;
+  const changeInput: any = (value: string) => {
+    setEditResult(value);
   };
+  console.log();
   return (
     <div className="left-editor">
       <AceEditor
+        value={editResult}
         mode="json"
         theme="monokai"
         showPrintMargin={false}
-        fontSize={18}
+        fontSize={16}
         focus={true}
         enableLiveAutocompletion={true}
         style={{

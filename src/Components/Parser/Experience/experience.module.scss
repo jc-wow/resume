@@ -1,0 +1,11 @@
+.experience {
+  font-size: 15px;
+  position: relative;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    .position {
+      font-weight: 600;
+    }
+  }
+}
