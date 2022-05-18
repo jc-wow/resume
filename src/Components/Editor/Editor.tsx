@@ -3,7 +3,6 @@ import "./editor.scss";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
-
 interface Props {
   setEditResult(value: string): void;
   editResult: string;
@@ -14,11 +13,14 @@ export const LeftEditor = (props: Props) => {
   const changeInput: any = (value: string) => {
     setEditResult(value);
   };
-  console.log();
+  const changeSelection = (selection, e) => {
+    console.log(selection, e);
+  };
   return (
     <div className="left-editor">
       <AceEditor
         value={editResult}
+        onSelectionChange={changeSelection}
         mode="json"
         theme="monokai"
         showPrintMargin={false}

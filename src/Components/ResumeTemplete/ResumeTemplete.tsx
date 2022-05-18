@@ -11,7 +11,7 @@ const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }
 export const ResumeTemplete = (props: { editResult: string }) => {
   const { editResult } = props;
   const formatEditResult: ResumeType = JSON.parse(editResult);
-  const { name, phone, email, workExperience, education, project } = formatEditResult;
+  const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = formatEditResult;
   return (
     <div className="resume-templete">
       <Name name={name}></Name>
