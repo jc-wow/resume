@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Expericence = exports.Email = exports.Phone = exports.Name = void 0;
+var Index_1 = require("./Name/Index");
+Object.defineProperty(exports, "Name", { enumerable: true, get: function () { return Index_1.Name; } });
+var Index_2 = require("./Phone/Index");
+Object.defineProperty(exports, "Phone", { enumerable: true, get: function () { return Index_2.Phone; } });
+var Index_3 = require("./Email/Index");
+Object.defineProperty(exports, "Email", { enumerable: true, get: function () { return Index_3.Email; } });
+var experience_1 = require("./Experience/experience");
+Object.defineProperty(exports, "Expericence", { enumerable: true, get: function () { return experience_1.Expericence; } });
