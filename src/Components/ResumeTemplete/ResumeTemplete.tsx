@@ -18,9 +18,9 @@ export const ResumeTemplete = (props: { editResult: string }) => {
   }
   const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = formatEditResult;
   return (
-    <div className="resume-templete">
+    <div className="resume-template">
       <Name name={name}></Name>
-      <div className="subtitle">
+      <div className="subtitle item">
         <div className="subtitle-left">
           <Phone phone={phone}></Phone>
         </div>

@@ -6,7 +6,7 @@ import { Divider } from "antd";
 export const ContentHead = (props: { contentHead: string }) => {
   const { contentHead } = props;
   return (
-    <div className={style.contentHead}>
+    <div className={style.contentHead + " item"}>
       {contentHead}
       <Divider className="contentHead-divider" />
     </div>

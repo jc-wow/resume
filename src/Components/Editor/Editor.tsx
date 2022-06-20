@@ -3,7 +3,6 @@ import "./editor.scss";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
-// import jsonlint from "jsonlint";
 
 interface Props {
   setEditResult(value: string): void;
@@ -15,15 +14,10 @@ export const LeftEditor = (props: Props) => {
   const changeInput: any = (value: string) => {
     setEditResult(value);
   };
-  const changeSelection = (selection, e) => {
-    console.log(selection, e);
-    // console.log(jsonlint);
-  };
   return (
     <div className="left-editor">
       <AceEditor
         value={editResult}
-        onSelectionChange={changeSelection}
         mode="json"
         theme="monokai"
         showPrintMargin={false}
