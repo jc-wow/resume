@@ -4,6 +4,7 @@
   "homepage": "https://jc-wow.github.io/resume",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@react-pdf/renderer": "^2.2.0",

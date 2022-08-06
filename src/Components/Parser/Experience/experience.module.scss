@@ -1,6 +1,10 @@
 .experience {
   font-size: 14px;
   position: relative;
+  .icon-container {
+    display: flex;
+    flex-direction: row-reverse;
+  }
   .title {
     display: flex;
     justify-content: space-between;

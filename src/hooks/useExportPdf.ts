@@ -22,6 +22,12 @@ const pdf = (containerClassname: string, fileName: string) => {
   html2canvas(target, {
     allowTaint: true,
     scale: 2,
+    ignoreElements: (e) => {
+      if (typeof e.className === "string") {
+        return e.className?.includes("ignore-ele");
+      }
+      return false;
+    },
   }).then((canvas) => {
     const contentWidth = canvas.width;
     const contentHeight = canvas.height;

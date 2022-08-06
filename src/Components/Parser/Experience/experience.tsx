@@ -1,52 +1,54 @@
 import React, { useState } from "react";
 import { ExpericenceContent } from "@/Constants/Types/ResumeType";
 import style from "./experience.module.scss";
-import { useMouseoverStyle } from "@/hooks/useMouseoverStyle";
+import { CloseCircleTwoTone } from "@ant-design/icons";
+import { ResumeType } from "@/Constants/Types/ResumeType";
 
-export const Expericence = (props: { experience: ExpericenceContent }) => {
+export const Expericence = (props: {
+  experience: ExpericenceContent;
+  formatEditResult: ResumeType;
+  contentIndex: number;
+  contentType: string;
+  setEditResult: (param: string) => void;
+}) => {
   const { title, occupation, time, content = {} } = props.experience;
-  const [isMouseover, setMouseState] = useState<{ title: boolean; time: boolean; occupation: boolean }>({
-    title: false,
-    time: false,
-    occupation: false,
-  });
-  const changeMouseState = (type: string, state: boolean) => {
-    isMouseover[type] = state;
-    setMouseState({ ...isMouseover });
+  const formatEditResult = props.formatEditResult;
+  const [isHoverContainer, setContainerState] = useState(false);
+  const setEditResult = props.setEditResult;
+  const removeContent = (type: string, index: number) => {
+    const targetItems = formatEditResult[type];
+    const deleteItemKey = Object.keys(targetItems)[index];
+    delete targetItems[deleteItemKey];
+    setEditResult(JSON.stringify(formatEditResult));
   };
-  const getContentObj = (content) => {
-    console.log(content);
-  };
+
   return (
-    <div className={style.experience + " item"}>
+    <div
+      className={style.experience + " item"}
+      style={{ background: isHoverContainer ? "rgba(44,105,249,.15)" : "#fff" }}
+      onMouseMove={() => setContainerState(true)}
+      onMouseLeave={() => setContainerState(false)}
+    >
+      <div className={style["icon-container"]}>
+        <CloseCircleTwoTone
+          style={{
+            fontSize: "17px",
+            cursor: "pointer",
+            display: isHoverContainer && Object.keys(formatEditResult[props.contentType]).length > 1 ? "block" : "none",
+            margin: "5px 5px 0px 0px",
+          }}
+          onClick={() => removeContent(props.contentType, props.contentIndex)}
+        ></CloseCircleTwoTone>
+      </div>
       <div className={style.title}>
-        <span
-          className={style.position}
-          contentEditable="true"
-          suppressContentEditableWarning
-          // onMouseOver={() => changeMouseState("title", true)}
-          // onMouseLeave={() => changeMouseState("title", false)}
-          // style={useMouseoverStyle(isMouseover.title)}
-        >
+        <span className={style.position} contentEditable="true" suppressContentEditableWarning>
           {title}
         </span>
-        <span
-          contentEditable="true"
-          suppressContentEditableWarning
-          // onMouseOver={() => changeMouseState("time", true)}
-          // onMouseLeave={() => changeMouseState("time", false)}
-          // style={useMouseoverStyle(isMouseover.time)}
-        >
+        <span contentEditable="true" suppressContentEditableWarning>
           {time}
         </span>
       </div>
-      <div
-        contentEditable="true"
-        suppressContentEditableWarning
-        // onMouseOver={() => changeMouseState("occupation", true)}
-        // onMouseLeave={() => changeMouseState("occupation", false)}
-        // style={useMouseoverStyle(isMouseover.occupation)}
-      >
+      <div contentEditable="true" suppressContentEditableWarning>
         {occupation}
       </div>
       <ul className={style.contentList}>

@@ -3,7 +3,7 @@ export const template = {
   phone: "123-4567-8888",
   email: "jc.wang@gmail.com",
   workExperience: {
-    exp1: {
+    ct1: {
       title: "高盛集团",
       occupation: "实习生 合规部门",
       time: "2016年12月-2017年3月",
@@ -12,7 +12,7 @@ export const template = {
         ct2: "监督日常交易，根据市场状况和具体交易数据分析并评价交易行为在",
       },
     },
-    exp2: {
+    ct2: {
       title: "中信并购基金",
       occupation: "实习生 投资部",
       time: "2016年7月-2016年9月",
@@ -24,7 +24,7 @@ export const template = {
     },
   },
   education: {
-    ed1: {
+    ct1: {
       title: "悉尼大学",
       occupation: "金融专业 硕士",
       time: "2017年9月-2019年7月",
@@ -33,7 +33,7 @@ export const template = {
         ct2: "相关课程：经济金融学、金融统计学、会计与资本市场、公司金融、投资银行业务",
       },
     },
-    ed2: {
+    ct2: {
       title: "清华大学",
       occupation: "经济与金融专业 本科",
       time: "2013年8月-2017年7月",
@@ -43,7 +43,7 @@ export const template = {
     },
   },
   project: {
-    p1: {
+    ct1: {
       title: "商学院学生委员会",
       occupation: "副主席",
       time: "2013年3月-2016年6月",
