@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ExpericenceContent } from "@/Constants/Types/ResumeType";
 import style from "./experience.module.scss";
 import { CloseCircleTwoTone } from "@ant-design/icons";
 import { ResumeType } from "@/Constants/Types/ResumeType";
+import ContentEditable from "react-contenteditable";
 
 export const Expericence = (props: {
   experience: ExpericenceContent;
@@ -12,14 +13,19 @@ export const Expericence = (props: {
   setEditResult: (param: string) => void;
 }) => {
   const { title, occupation, time, content = {} } = props.experience;
-  const formatEditResult = props.formatEditResult;
-  const [isHoverContainer, setContainerState] = useState(false);
-  const setEditResult = props.setEditResult;
+  const { formatEditResult, setEditResult, contentIndex, experience, contentType } = props;
+  const [isHoverContainer, setContainerState] = useState<boolean>(false);
   const removeContent = (type: string, index: number) => {
     const targetItems = formatEditResult[type];
     const deleteItemKey = Object.keys(targetItems)[index];
     delete targetItems[deleteItemKey];
-    setEditResult(JSON.stringify(formatEditResult));
+    // setEditResult(JSON.stringify(formatEditResult));
+  };
+  const titleRef = useRef<string>();
+  const setChangeContentValue = (val: string, type: string): void => {
+    formatEditResult[contentType][`ct${contentIndex + 1}`][type] = val;
+    const stringRes = JSON.stringify(formatEditResult);
+    setEditResult(stringRes);
   };
 
   return (
@@ -41,12 +47,13 @@ export const Expericence = (props: {
         ></CloseCircleTwoTone>
       </div>
       <div className={style.title}>
-        <span className={style.position} contentEditable="true" suppressContentEditableWarning>
-          {title}
-        </span>
-        <span contentEditable="true" suppressContentEditableWarning>
-          {time}
-        </span>
+        <ContentEditable
+          className={style.position}
+          html={title}
+          innerRef={titleRef}
+          onChange={(event) => setChangeContentValue(event.target.value, "title")}
+        ></ContentEditable>
+        <ContentEditable html={time} onChange={() => console.log(time)}></ContentEditable>
       </div>
       <div contentEditable="true" suppressContentEditableWarning>
         {occupation}
