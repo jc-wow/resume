@@ -1,7 +1,7 @@
 import React from "react";
 import "./phone.scss";
 
-export const Phone = (props: { phone?: string }) => {
+export const Phone = (props: { phone?: string }): JSX.Element => {
   const { phone } = props;
 
   return (

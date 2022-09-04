@@ -3,20 +3,23 @@ import "./resumeTemplete.scss";
 import { Name, Phone, Email, Expericence } from "@/Components/Parser/Index";
 import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
+import { nanoid } from "nanoid";
 
 const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
-  return Object.keys(experience).map((ele) => experience[ele]);
+  return Object.keys(experience).map((ele: string) => {
+    if (!experience[ele].id) {
+      experience[ele].id = nanoid();
+    }
+    return experience[ele];
+  });
 };
 
-export const ResumeTemplete = (props: { editResult: string; setEditResult: (param: string) => void }) => {
+export const ResumeTemplete = (props: {
+  editResult: ResumeType;
+  setEditResult: (param: ResumeType) => void;
+}): JSX.Element => {
   const { editResult, setEditResult } = props;
-  let formatEditResult: ResumeType;
-  try {
-    formatEditResult = JSON.parse(editResult);
-  } catch (e) {
-    console.log(formatEditResult);
-  }
-  const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = formatEditResult;
+  const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = editResult;
   return (
     <div className="resume-template">
       <Name name={name}></Name>
@@ -29,7 +32,7 @@ export const ResumeTemplete = (props: { editResult: string; setEditResult: (para
         </div>
       </div>
       <ContentHead
-        formatEditResult={formatEditResult}
+        editResult={editResult}
         contentHead={"教育经历"}
         type={"education"}
         setEditResult={setEditResult}
@@ -37,42 +40,42 @@ export const ResumeTemplete = (props: { editResult: string; setEditResult: (para
       {getExperienceJsx(education).map((ele, index) => (
         <Expericence
           experience={ele}
-          key={ele.title + index}
-          contentIndex={index}
+          key={index}
+          id={ele.id}
           contentType={"education"}
-          formatEditResult={formatEditResult}
+          editResult={editResult}
           setEditResult={setEditResult}
         ></Expericence>
       ))}
       <ContentHead
         setEditResult={setEditResult}
-        formatEditResult={formatEditResult}
+        editResult={editResult}
         contentHead={"工作经历"}
         type={"workExperience"}
       ></ContentHead>
       {getExperienceJsx(workExperience).map((ele, index) => (
         <Expericence
           experience={ele}
-          key={ele.title + index}
-          contentIndex={index}
+          key={index}
+          id={ele.id}
           contentType={"workExperience"}
-          formatEditResult={formatEditResult}
+          editResult={editResult}
           setEditResult={setEditResult}
         ></Expericence>
       ))}
       <ContentHead
         setEditResult={setEditResult}
-        formatEditResult={formatEditResult}
+        editResult={editResult}
         contentHead={"工作以外经历"}
         type={"project"}
       ></ContentHead>
       {getExperienceJsx(project).map((ele, index) => (
         <Expericence
           experience={ele}
-          key={ele.title + index}
-          contentIndex={index}
+          key={index}
+          id={ele.id}
           contentType={"project"}
-          formatEditResult={formatEditResult}
+          editResult={editResult}
           setEditResult={setEditResult}
         ></Expericence>
       ))}

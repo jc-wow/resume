@@ -3,9 +3,10 @@ import "./main.scss";
 import { ResumeTemplete } from "../ResumeTemplete/ResumeTemplete";
 import { template } from "@/Constants/Config/resume-config";
 import { View } from "@/Components/TemplateFunctionComponent/View/View";
+import { ResumeType } from "@/Constants/Types/ResumeType";
 
-export const MainPage = () => {
-  const [editResult, setEditResult] = useState<string>(JSON.stringify(template, null, 2));
+export const MainPage = (): JSX.Element => {
+  const [editResult, setEditResult] = useState<ResumeType>(JSON.parse(JSON.stringify(template)));
   return (
     <div className="resume-main">
       <div>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./email.scss";
 
-export const Email = (props: { email: string }) => {
+export const Email = (props: { email: string }): JSX.Element => {
   const { email } = props;
 
   return (

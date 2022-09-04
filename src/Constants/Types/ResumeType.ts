@@ -14,10 +14,9 @@ export interface ResumeType {
 }
 
 export interface ExpericenceContent {
+  id?: string;
   title?: string;
   occupation?: string;
   time?: string;
-  content?: {
-    [propName: string]: string;
-  };
+  content?: Array<string>;
 }

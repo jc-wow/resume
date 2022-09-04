@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import { useExportPdf } from "@/hooks/useExportPdf";
 
-export const View = () => {
+export const View = (): JSX.Element => {
   return (
     <div>
       <Button

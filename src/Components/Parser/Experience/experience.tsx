@@ -1,31 +1,38 @@
-import React, { useState, useRef } from "react";
-import { ExpericenceContent } from "@/Constants/Types/ResumeType";
+import React, { useState } from "react";
+import { ExpericenceContent, ResumeType } from "@/Constants/Types/ResumeType";
 import style from "./experience.module.scss";
 import { CloseCircleTwoTone } from "@ant-design/icons";
-import { ResumeType } from "@/Constants/Types/ResumeType";
 import ContentEditable from "react-contenteditable";
+import product from "immer";
 
 export const Expericence = (props: {
   experience: ExpericenceContent;
-  formatEditResult: ResumeType;
-  contentIndex: number;
+  editResult: ResumeType;
+  id: string;
   contentType: string;
-  setEditResult: (param: string) => void;
-}) => {
-  const { title, occupation, time, content = {} } = props.experience;
-  const { formatEditResult, setEditResult, contentIndex, experience, contentType } = props;
+  setEditResult: (param: ResumeType) => void;
+}): JSX.Element => {
+  const { editResult, setEditResult, id, experience, contentType } = props;
+  const { title, occupation, time, content = [] } = experience;
   const [isHoverContainer, setContainerState] = useState<boolean>(false);
-  const removeContent = (type: string, index: number) => {
-    const targetItems = formatEditResult[type];
-    const deleteItemKey = Object.keys(targetItems)[index];
-    delete targetItems[deleteItemKey];
-    // setEditResult(JSON.stringify(formatEditResult));
+  const targetItems: ExpericenceContent = editResult[contentType];
+  const targetKey: string = Object.keys(targetItems).filter((key: string) => targetItems[key].id === id)[0];
+  const removeContent = (): void => {
+    const toggle = product((draft) => {
+      delete draft[contentType][targetKey];
+    }, editResult);
+    setEditResult(toggle());
   };
-  const titleRef = useRef<string>();
-  const setChangeContentValue = (val: string, type: string): void => {
-    formatEditResult[contentType][`ct${contentIndex + 1}`][type] = val;
-    const stringRes = JSON.stringify(formatEditResult);
-    setEditResult(stringRes);
+  const setChangeContentValue = (val: string, type: string, ctxIndex?: number): void => {
+    const toggle = product((draft) => {
+      const targetContent = draft[contentType][targetKey];
+      if (typeof ctxIndex === "number") {
+        targetContent[type][ctxIndex] = val;
+      } else {
+        targetContent[type] = val;
+      }
+    }, editResult);
+    setEditResult(toggle());
   };
 
   return (
@@ -40,32 +47,36 @@ export const Expericence = (props: {
           style={{
             fontSize: "17px",
             cursor: "pointer",
-            display: isHoverContainer && Object.keys(formatEditResult[props.contentType]).length > 1 ? "block" : "none",
+            display: isHoverContainer && Object.keys(editResult[props.contentType]).length > 1 ? "block" : "none",
             margin: "5px 5px 0px 0px",
           }}
-          onClick={() => removeContent(props.contentType, props.contentIndex)}
+          onClick={() => removeContent()}
         ></CloseCircleTwoTone>
       </div>
       <div className={style.title}>
         <ContentEditable
           className={style.position}
           html={title}
-          innerRef={titleRef}
           onChange={(event) => setChangeContentValue(event.target.value, "title")}
         ></ContentEditable>
-        <ContentEditable html={time} onChange={() => console.log(time)}></ContentEditable>
+        <ContentEditable
+          html={time}
+          onChange={(event) => setChangeContentValue(event.target.value, "time")}
+        ></ContentEditable>
       </div>
-      <div contentEditable="true" suppressContentEditableWarning>
-        {occupation}
-      </div>
+      <ContentEditable
+        html={occupation}
+        onChange={(event) => setChangeContentValue(event.target.value, "occupation")}
+      ></ContentEditable>
       <ul className={style.contentList}>
-        {Object.keys(content)
-          .map((ele) => content[ele])
-          .map((ele, index) => (
-            <li key={ele + index} contentEditable="true" suppressContentEditableWarning>
-              {ele}
-            </li>
-          ))}
+        {content.map((ele, index) => (
+          <li key={index}>
+            <ContentEditable
+              html={ele}
+              onChange={(event) => setChangeContentValue(event.target.value, "content", index)}
+            ></ContentEditable>
+          </li>
+        ))}
       </ul>
     </div>
   );
