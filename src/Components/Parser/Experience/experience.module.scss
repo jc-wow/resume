@@ -4,6 +4,11 @@
   .icon-container {
     display: flex;
     flex-direction: row-reverse;
+    .del-item {
+      margin: 5px 0px 0px 0px;
+      font-size: 17px;
+      cursor: pointer;
+    }
   }
   .title {
     display: flex;
@@ -14,5 +19,15 @@
   }
   .contentList {
     margin: 0 0 10px -20px;
+    .content-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .del-icon {
+      font-size: 17px;
+      cursor: pointer;
+      color: rgb(24, 144, 255);
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ExpericenceContent, ResumeType } from "@/Constants/Types/ResumeType";
 import style from "./experience.module.scss";
-import { CloseCircleTwoTone } from "@ant-design/icons";
+import { CloseCircleTwoTone, MinusCircleOutlined } from "@ant-design/icons";
 import ContentEditable from "react-contenteditable";
 import product from "immer";
 
@@ -23,6 +23,7 @@ export const Expericence = (props: {
     }, editResult);
     setEditResult(toggle());
   };
+
   const setChangeContentValue = (val: string, type: string, ctxIndex?: number): void => {
     const toggle = product((draft) => {
       const targetContent = draft[contentType][targetKey];
@@ -31,6 +32,14 @@ export const Expericence = (props: {
       } else {
         targetContent[type] = val;
       }
+    }, editResult);
+    setEditResult(toggle());
+  };
+
+  const removeContentItem = (ctxIndex: number): void => {
+    const toggle = product((draft) => {
+      const targetContent = draft[contentType][targetKey];
+      targetContent.content.splice(ctxIndex, 1);
     }, editResult);
     setEditResult(toggle());
   };
@@ -44,11 +53,9 @@ export const Expericence = (props: {
     >
       <div className={style["icon-container"]}>
         <CloseCircleTwoTone
+          className={style["del-item"]}
           style={{
-            fontSize: "17px",
-            cursor: "pointer",
             display: isHoverContainer && Object.keys(editResult[props.contentType]).length > 1 ? "block" : "none",
-            margin: "5px 5px 0px 0px",
           }}
           onClick={() => removeContent()}
         ></CloseCircleTwoTone>
@@ -71,10 +78,19 @@ export const Expericence = (props: {
       <ul className={style.contentList}>
         {content.map((ele, index) => (
           <li key={index}>
-            <ContentEditable
-              html={ele}
-              onChange={(event) => setChangeContentValue(event.target.value, "content", index)}
-            ></ContentEditable>
+            <div className={style["content-item"]}>
+              <ContentEditable
+                html={ele}
+                onChange={(event) => setChangeContentValue(event.target.value, "content", index)}
+              ></ContentEditable>
+              <MinusCircleOutlined
+                className={style["del-icon"]}
+                onClick={() => removeContentItem(index)}
+                style={{
+                  display: isHoverContainer && content.length > 1 ? "block" : "none",
+                }}
+              />
+            </div>
           </li>
         ))}
       </ul>
