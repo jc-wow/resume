@@ -1,8 +1,9 @@
 import React from "react";
 import "./resumeTemplete.scss";
-import { Name, Phone, Email, Expericence } from "@/Components/Parser/Index";
+import { Expericence } from "@/Components/Parser/Index";
 import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
+import { Info } from "@/Common/Info/info";
 import { nanoid } from "nanoid";
 
 const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
@@ -22,13 +23,15 @@ export const ResumeTemplete = (props: {
   const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = editResult;
   return (
     <div className="resume-template">
-      <Name name={name}></Name>
+      <div className="name">
+        <Info content={name} editResult={editResult} setEditResult={setEditResult} infoType="name"></Info>
+      </div>
       <div className="subtitle item">
         <div className="subtitle-left">
-          <Phone phone={phone}></Phone>
+          <Info content={phone} editResult={editResult} setEditResult={setEditResult} infoType="phone"></Info>
         </div>
         <div className="subtitle-right">
-          <Email email={email}></Email>
+          <Info content={email} editResult={editResult} setEditResult={setEditResult} infoType="email"></Info>
         </div>
       </div>
       <ContentHead

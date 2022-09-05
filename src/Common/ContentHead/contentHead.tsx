@@ -21,6 +21,7 @@ export const ContentHead = (props: {
     const lastItemKeyIndex = lastItemKey[lastItemKey.length - 1];
     const content: ExpericenceContent = JSON.parse(JSON.stringify(template[type]["ct1"]));
     content.id = nanoid();
+
     const toggle = produce((draft) => {
       draft[type][`ct${parseInt(lastItemKeyIndex) + 1}`] = content;
     }, editResult);
