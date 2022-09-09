@@ -4,6 +4,35 @@ import style from "./experience.module.scss";
 import { CloseCircleTwoTone, MinusCircleOutlined } from "@ant-design/icons";
 import ContentEditable from "react-contenteditable";
 import product from "immer";
+import { EmptyIcon } from "@/Common/Icon/empty";
+
+const ExperitenceElement = (props: {
+  html: string;
+  type: string;
+  setChangeContentValue: (val: string, type: string, index?: number) => void;
+  className?: string;
+  index?: number;
+}): JSX.Element => {
+  const { html, type, className, index, setChangeContentValue } = props;
+  return (
+    <ContentEditable
+      className={html.length ? className : ""}
+      html={html}
+      onChange={(event) => setChangeContentValue(event.target.value, type, index)}
+    ></ContentEditable>
+  );
+  // if (!html.length) {
+  //   return <EmptyIcon></EmptyIcon>;
+  // } else {
+  //   return (
+  //     <ContentEditable
+  //       className={className}
+  //       html={html}
+  //       onChange={(event) => setChangeContentValue(event.target.value, type, index)}
+  //     ></ContentEditable>
+  //   );
+  // }
+};
 
 export const Expericence = (props: {
   experience: ExpericenceContent;
@@ -61,8 +90,14 @@ export const Expericence = (props: {
         ></CloseCircleTwoTone>
       </div>
       <div className={style.title}>
-        <ContentEditable
+        {/* <ExperitenceElement
+          html={title}
           className={style.position}
+          type={"title"}
+          setChangeContentValue={setChangeContentValue}
+        ></ExperitenceElement> */}
+        <ContentEditable
+          className={title.length ? style.position : style.empty}
           html={title}
           onChange={(event) => setChangeContentValue(event.target.value, "title")}
         ></ContentEditable>
