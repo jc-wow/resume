@@ -2,6 +2,7 @@ import React from "react";
 import { ResumeType } from "@/Constants/Types/ResumeType";
 import produce from "immer";
 import ContentEditable from "react-contenteditable";
+import emptyIcon from "@/Style/emptyIcon.module.scss";
 
 export const Info = (props: {
   content: string;
@@ -13,6 +14,7 @@ export const Info = (props: {
 
   return (
     <ContentEditable
+      className={content.length ? "" : emptyIcon["empty-text"]}
       html={content}
       onChange={(event) => {
         setEditResult(
