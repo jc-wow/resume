@@ -1,6 +1,32 @@
 .experience {
   font-size: 14px;
   position: relative;
+  width: calc(100% + 25px);
+  .wrap {
+    width: calc(100% - 25px);
+  }
+  .img {
+    position: absolute;
+    right: 1px;
+    top: 50%;
+    width: 35px;
+    transform: translate(50%, -50%);
+    z-index: 999;
+    cursor: pointer;
+  }
+  .up {
+    top: 30%;
+  }
+  .down {
+    top: 70%;
+  }
+  .center {
+    top: 50%;
+  }
+  .hide {
+    display: none;
+  }
+
   .icon-container {
     display: flex;
     flex-direction: row-reverse;
@@ -29,5 +55,19 @@
       cursor: pointer;
       color: rgb(24, 144, 255);
     }
+  }
+}
+
+.hover {
+  background: rgba(44, 105, 249, 0.15);
+  &::after {
+    content: "";
+    width: calc(100%);
+    display: inline;
+    position: absolute;
+    height: calc(100% + 1px);
+    top: -1px;
+    border: 2px dashed rgba(44, 105, 249, 0.15);
+    z-index: -99;
   }
 }
