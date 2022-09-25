@@ -42,6 +42,13 @@
     .position {
       font-weight: 600;
     }
+    .box {
+      width: calc(100% - 200px);
+    }
+    .time-box {
+      text-align: right;
+      min-width: 200px;
+    }
   }
   .contentList {
     margin: 0 0 10px -20px;
@@ -67,7 +74,7 @@
     position: absolute;
     height: calc(100% + 1px);
     top: -1px;
-    border: 2px dashed rgba(44, 105, 249, 0.15);
+    border: 2px dashed #2c69f926;
     z-index: -99;
   }
 }

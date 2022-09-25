@@ -4,7 +4,8 @@ import style from "./experience.module.scss";
 import { CloseCircleTwoTone, MinusCircleOutlined } from "@ant-design/icons";
 import ContentEditable from "react-contenteditable";
 import product from "immer";
-import emptyIcon from "@/Style/emptyIcon.module.scss";
+import emptyPlacehold from "@/Style/emptyPlacehold.module.scss";
+import contentBox from "@/Style/contentBox.module.scss";
 
 export const Expericence = (props: {
   experience: ExpericenceContent;
@@ -66,16 +67,15 @@ export const Expericence = (props: {
   };
 
   const mouseOverContainer = (): void => {
-    // changeContentItem(0, "add");
+    changeContentItem(0, "add");
     setContainerState(true);
   };
 
   const mouseLeaveContainer = (): void => {
-    // const lastItem = targetItems[targetKey].content[[targetItems[targetKey].content.length - 1]];
-    // if (targetItems[targetKey].content.length > 1 && !lastItem) {
-    //   changeContentItem(targetItems[targetKey].content.length - 1, "remove");
-    //   setContainerState(false);
-    // }
+    const lastItem = targetItems[targetKey].content[[targetItems[targetKey].content.length - 1]];
+    if (targetItems[targetKey].content.length > 1 && !lastItem) {
+      changeContentItem(targetItems[targetKey].content.length - 1, "remove");
+    }
     setContainerState(false);
   };
 
@@ -132,19 +132,26 @@ export const Expericence = (props: {
         </div>
         <div className={style.title}>
           <ContentEditable
-            className={title.length ? style.position : emptyIcon["empty-text"]}
+            className={`${title.length ? style.position : emptyPlacehold["empty-placehold"]} ${
+              contentBox["content-box"]
+            } ${style["box"]}`}
             html={title}
+            placeholder={"请输入学校"}
             onChange={(event) => setChangeContentValue(event.target.value, "title")}
           ></ContentEditable>
           <ContentEditable
-            className={time.length ? "" : emptyIcon["empty-text"]}
+            className={`${time.length ? "" : emptyPlacehold["empty-placehold"]} ${contentBox["content-box"]} ${
+              style["time-box"]
+            }`}
             html={time}
+            placeholder={"请输入时间"}
             onChange={(event) => setChangeContentValue(event.target.value, "time")}
           ></ContentEditable>
         </div>
         <ContentEditable
-          className={occupation.length ? "" : emptyIcon["empty-text"]}
+          className={`${occupation.length ? "" : emptyPlacehold["empty-placehold"]}  ${contentBox["content-box"]}`}
           html={occupation}
+          placeholder={"请输入专业/学历"}
           onChange={(event) => setChangeContentValue(event.target.value, "occupation")}
         ></ContentEditable>
         <ul className={style.contentList}>
@@ -152,8 +159,9 @@ export const Expericence = (props: {
             <li key={index}>
               <div className={style["content-item"]}>
                 <ContentEditable
-                  className={ele.length ? "" : emptyIcon["empty-text"]}
+                  className={`${ele.length ? "" : emptyPlacehold["empty-placehold"]} ${contentBox["content-box"]}`}
                   html={ele}
+                  placeholder={"请输入履历"}
                   onChange={(event) => setChangeContentValue(event.target.value, "content", index)}
                 ></ContentEditable>
                 <MinusCircleOutlined
