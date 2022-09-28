@@ -5,6 +5,8 @@ import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
 import { Info } from "@/Common/Info/info";
 import { nanoid } from "nanoid";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
   return Object.keys(experience).map((ele: string) => {
@@ -21,7 +23,12 @@ export const ResumeTemplete = (props: {
 }): JSX.Element => {
   const { editResult, setEditResult } = props;
   const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = editResult;
-
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: nanoid() });
+  console.log(setNodeRef);
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
   return (
     <div className="resume-template">
       <div className={`${name ? "name" : "center"} mb-4`}>
@@ -35,7 +42,7 @@ export const ResumeTemplete = (props: {
           <Info content={email} editResult={editResult} setEditResult={setEditResult} infoType="email"></Info>
         </div>
       </div>
-      <div>
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
         <ContentHead
           editResult={editResult}
           contentHead={"教育经历"}
