@@ -1,14 +1,10 @@
 import React from "react";
 import { Button } from "antd";
-import { useExportPdf } from "@/Hooks/useExportPdf";
 
 export const View = (): JSX.Element => {
   return (
-    <div>
-      <Button
-        type="primary"
-        onClick={() => useExportPdf({ containerClassname: "resume-template", itemClassName: "item", fileName: "简历" })}
-      >
+    <div className="no-print">
+      <Button type="primary" onClick={window.print}>
         导出pdf
       </Button>
     </div>

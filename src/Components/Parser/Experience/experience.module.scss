@@ -39,15 +39,12 @@
   .title {
     display: flex;
     justify-content: space-between;
+    margin: 4px 0;
     .position {
       font-weight: 600;
     }
-    .box {
-      width: calc(100% - 200px);
-    }
     .time-box {
       text-align: right;
-      min-width: 200px;
     }
   }
   .contentList {

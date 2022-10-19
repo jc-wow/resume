@@ -1,17 +1,29 @@
 .contentHead {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
-  .content {
+  .content-wrap {
     display: flex;
     justify-content: space-between;
+    .content-container {
+      display: flex;
+      align-items: center;
+      .img {
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+      }
+      .content {
+        font-size: 18px;
+      }
+    }
   }
   :global {
     .ant-divider-horizontal {
       margin: 1px 0 4px 0;
     }
     .ant-divider {
-      border-top: 1px solid rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(0, 0, 0, 1);
     }
   }
 }

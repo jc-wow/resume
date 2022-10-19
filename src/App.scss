@@ -1,0 +1,9 @@
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+.App {
+  font: 12px/1.5 Tahoma, Helvetica, Arial, "宋体", sans-serif;
+}

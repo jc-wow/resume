@@ -1,21 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./resumeTemplete.scss";
 import { Expericence } from "@/Components/Parser/Index";
 import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
 import { Info } from "@/Common/Info/info";
 import { nanoid } from "nanoid";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
-const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
-  return Object.keys(experience).map((ele: string) => {
-    if (!experience[ele].id) {
-      experience[ele].id = nanoid();
-    }
-    return experience[ele];
-  });
-};
 
 export const ResumeTemplete = (props: {
   editResult: ResumeType;
@@ -23,12 +12,20 @@ export const ResumeTemplete = (props: {
 }): JSX.Element => {
   const { editResult, setEditResult } = props;
   const { name = "", phone = "", email = "", workExperience = {}, education = {}, project = {} } = editResult;
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: nanoid() });
-  console.log(setNodeRef);
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
+  const getExperienceJsx = (experience: { [propName: string]: ExpericenceContent }) => {
+    return Object.keys(experience).map((ele: string) => {
+      if (!experience[ele].id) {
+        experience[ele].id = nanoid();
+      }
+      return experience[ele];
+    });
   };
+  const [headContent, setHeadContent] = useState<{ education: string; workExperience: string; project: string }>({
+    education: "教育经历",
+    workExperience: "工作经历",
+    project: "项目/其他经历",
+  });
+
   return (
     <div className="resume-template">
       <div className={`${name ? "name" : "center"} mb-4`}>
@@ -36,16 +33,31 @@ export const ResumeTemplete = (props: {
       </div>
       <div className="subtitle item">
         <div className="subtitle-left">
-          <Info content={phone} editResult={editResult} setEditResult={setEditResult} infoType="phone"></Info>
+          <Info
+            imgName="tel"
+            content={phone}
+            editResult={editResult}
+            setEditResult={setEditResult}
+            infoType="phone"
+            position="left"
+          ></Info>
         </div>
         <div className="subtitle-right">
-          <Info content={email} editResult={editResult} setEditResult={setEditResult} infoType="email"></Info>
+          <Info
+            content={email}
+            imgName="email-fill"
+            editResult={editResult}
+            setEditResult={setEditResult}
+            infoType="email"
+            position="right"
+          ></Info>
         </div>
       </div>
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <div>
         <ContentHead
           editResult={editResult}
-          contentHead={"教育经历"}
+          contentHead={headContent}
+          setHeadContent={setHeadContent}
           type={"education"}
           setEditResult={setEditResult}
         ></ContentHead>
@@ -64,7 +76,8 @@ export const ResumeTemplete = (props: {
         <ContentHead
           setEditResult={setEditResult}
           editResult={editResult}
-          contentHead={"工作经历"}
+          contentHead={headContent}
+          setHeadContent={setHeadContent}
           type={"workExperience"}
         ></ContentHead>
         {getExperienceJsx(workExperience).map((ele, index) => (
@@ -82,7 +95,8 @@ export const ResumeTemplete = (props: {
         <ContentHead
           setEditResult={setEditResult}
           editResult={editResult}
-          contentHead={"工作以外经历"}
+          contentHead={headContent}
+          setHeadContent={setHeadContent}
           type={"project"}
         ></ContentHead>
         {getExperienceJsx(project).map((ele, index) => (
