@@ -1,4 +1,9 @@
 .resume-main {
   width: 100%;
   display: flex;
+  min-height: 100vh;
+  position: relative;
+  justify-content: center;
+  padding: 5vh 0;
+  flex-direction: row-reverse;
 }

@@ -103,8 +103,13 @@ export const Expericence = (props: {
   };
 
   return (
-    <div className={style.experience} onMouseMove={mouseOverContainer} onMouseLeave={mouseLeaveContainer}>
-      <div className={`${style.wrap} ${isHoverContainer ? style.hover : ""}`}>
+    <div
+      className={style.experience}
+      onMouseMove={mouseOverContainer}
+      onMouseLeave={mouseLeaveContainer}
+      custom-label={contentType}
+    >
+      <div className={`${style.wrap} ${isHoverContainer ? style.hover : ""}`} custom-label={contentType}>
         <img
           className={`${style.img} ${style.up} ${
             isHoverContainer && Object.keys(editResult[contentType]).length > 1 && contentIndex !== 0 ? "" : style.hide
@@ -121,7 +126,7 @@ export const Expericence = (props: {
           src={require("@/Assets/down.svg").default}
           onClick={() => moveItem("down")}
         />
-        <div className={style["icon-container"]}>
+        <div className={style["icon-container"]} custom-label={contentType}>
           <CloseCircleTwoTone
             className={style["del-item"]}
             style={{
@@ -130,7 +135,7 @@ export const Expericence = (props: {
             onClick={() => removeContent()}
           ></CloseCircleTwoTone>
         </div>
-        <div className={style.title}>
+        <div className={style.title} custom-label={contentType}>
           <ContentEditable
             className={`${title.length ? style.position : emptyPlacehold["empty-placehold"]} ${
               contentBox["content-box"]
@@ -148,16 +153,18 @@ export const Expericence = (props: {
             onChange={(event) => setChangeContentValue(event.target.value, "time")}
           ></ContentEditable>
         </div>
-        <ContentEditable
-          className={`${occupation.length ? "" : emptyPlacehold["empty-placehold"]}  ${contentBox["content-box"]}`}
-          html={occupation}
-          placeholder={contentType === "education" ? "请输入专业/学历" : "请输入角色"}
-          onChange={(event) => setChangeContentValue(event.target.value, "occupation")}
-        ></ContentEditable>
-        <ul className={style.contentList}>
+        <div className={style["occupation"]}>
+          <ContentEditable
+            className={`${occupation.length ? "" : emptyPlacehold["empty-placehold"]}  ${contentBox["content-box"]}`}
+            html={occupation}
+            placeholder={contentType === "education" ? "请输入专业/学历" : "请输入角色"}
+            onChange={(event) => setChangeContentValue(event.target.value, "occupation")}
+          ></ContentEditable>
+        </div>
+        <ul className={style.contentList} custom-label={contentType}>
           {content.map((ele, index) => (
             <li key={index}>
-              <div className={style["content-item"]}>
+              <div className={style["content-item"]} custom-label={contentType}>
                 <ContentEditable
                   className={`${ele.length ? "" : emptyPlacehold["empty-placehold"]} ${contentBox["content-box"]}`}
                   html={ele}

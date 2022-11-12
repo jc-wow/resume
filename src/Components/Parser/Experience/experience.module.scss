@@ -30,6 +30,8 @@
   .icon-container {
     display: flex;
     flex-direction: row-reverse;
+    position: relative;
+    z-index: 999;
     .del-item {
       margin: 5px 0px 0px 0px;
       font-size: 17px;
@@ -40,6 +42,8 @@
     display: flex;
     justify-content: space-between;
     margin: 4px 0;
+    position: relative;
+    z-index: 999;
     .position {
       font-weight: 600;
     }
@@ -47,8 +51,14 @@
       text-align: right;
     }
   }
+  .occupation {
+    position: relative;
+    z-index: 999;
+  }
   .contentList {
     margin: 0 0 10px -20px;
+    position: relative;
+    z-index: 999;
     .content-item {
       display: flex;
       align-items: center;
@@ -63,7 +73,7 @@
 }
 
 .hover {
-  background: rgba(44, 105, 249, 0.15);
+  background: rgba(44, 105, 249, 0.15) !important;
   &::after {
     content: "";
     width: calc(100%);
@@ -72,6 +82,5 @@
     height: calc(100% + 1px);
     top: -1px;
     border: 2px dashed #2c69f926;
-    z-index: -99;
   }
 }

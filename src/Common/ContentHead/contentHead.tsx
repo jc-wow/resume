@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./contentHead.module.scss";
 import "antd/dist/antd.css";
 import { Divider } from "antd";
-import { PlusCircleTwoTone } from "@ant-design/icons";
+import { PlusCircleTwoTone, DragOutlined } from "@ant-design/icons";
 import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { template } from "@/Constants/Config/resume-config";
 import produce from "immer";
@@ -52,6 +52,15 @@ export const ContentHead = (props: {
               });
             }}
           ></ContentEditable>
+          <DragOutlined
+            style={{
+              fontSize: "22px",
+              color: "#1890ff",
+              marginLeft: "10px",
+              cursor: "move",
+              display: isIconShow ? "block" : "none",
+            }}
+          ></DragOutlined>
         </div>
         <div style={{ display: isIconShow ? "block" : "none" }}>
           <PlusCircleTwoTone

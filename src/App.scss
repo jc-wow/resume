@@ -3,7 +3,100 @@
   .no-print * {
     display: none !important;
   }
+  .resume-template {
+    width: 100%;
+    margin-top: 0px;
+    padding: 0px 20px 20px 20px;
+  }
 }
 .App {
   font: 12px/1.5 Tahoma, Helvetica, Arial, "宋体", sans-serif;
+  background: #f7f7f8;
+  .main-page {
+    height: 100vh;
+    section {
+      position: absolute;
+      width: 100%;
+      top: calc(45% - 235px);
+      text-align: center;
+      .main-title {
+        position: relative;
+        padding-bottom: 7px !important;
+        font-size: 100px;
+      }
+      .second-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .explore-logo {
+          cursor: pointer;
+          margin-left: 15px;
+          .explore-line-wrap {
+            display: flex;
+            width: auto;
+            height: 20px;
+            margin-bottom: 5px;
+            justify-content: flex-end;
+            align-items: center;
+            transform: translate3d(0%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)
+              skew(0deg, 0deg);
+            transform-style: preserve-3d;
+            .explore-line {
+              position: absolute;
+              width: 29px;
+              height: 1px;
+              background-color: #000;
+            }
+            .explore-arrow {
+              display: flex;
+              align-items: center;
+            }
+          }
+          .explore-text {
+            font-family: Neuemontreal, sans-serif;
+            color: #000;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-transform: uppercase;
+          }
+          .underline {
+            height: 1px;
+          }
+          .active {
+            background: #000;
+            width: 100%;
+            transition: all 1s;
+          }
+          .inactive {
+            width: 0;
+            transition: all 1s;
+          }
+        }
+        .desc {
+          font-style: italic;
+          font-size: 20px;
+          margin-right: 10px;
+        }
+        label {
+          display: inline-block;
+          padding: 9px 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: #2f858d;
+          text-shadow: 0 1px 0 #fff;
+          border-radius: 5px;
+          margin-left: 10px;
+          padding-left: 30px;
+          padding-right: 30px;
+          box-shadow: 0 1px 2px rgb(0 91 103 / 18%);
+          background: linear-gradient(#fff, #ecf9f7 92%, #def4f1);
+          cursor: pointer;
+          transition: all 0.25s;
+        }
+        .active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
 }
