@@ -50,14 +50,6 @@ const App = (): JSX.Element => {
                 <div className={`underline ${hasClick ? "active" : "inactive"}`}></div>
               </div>
             </div>
-            {/* <label
-              className={`${hasClick ? "active" : "inactive"}`}
-              onMouseDown={() => clickTry(true)}
-              onMouseUp={() => clickTry(false)}
-              onClick={() => scrollToResume()}
-            >
-              试一试
-            </label> */}
           </div>
         </section>
       </div>
