@@ -44,12 +44,13 @@
     margin: 4px 0;
     position: relative;
     z-index: 999;
-    .position {
-      font-weight: 600;
-    }
+
     .time-box {
       text-align: right;
     }
+  }
+  .position {
+    font-weight: 600;
   }
   .occupation {
     position: relative;

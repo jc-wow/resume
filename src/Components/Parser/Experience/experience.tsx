@@ -139,7 +139,7 @@ export const Expericence = (props: {
           <ContentEditable
             className={`${title.length ? style.position : emptyPlacehold["empty-placehold"]} ${
               contentBox["content-box"]
-            } ${style["box"]}`}
+            }`}
             html={title}
             placeholder={contentType === "education" ? "请输入学校" : "请输入机构/组织"}
             onChange={(event) => setChangeContentValue(event.target.value, "title")}

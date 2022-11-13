@@ -10,9 +10,10 @@
   }
 }
 .App {
-  font: 12px/1.5 Tahoma, Helvetica, Arial, "宋体", sans-serif;
+  font-size: 12px/1.5;
   background: #f7f7f8;
   .main-page {
+    font-family: Tahoma, Helvetica, Arial, "宋体", sans-serif;
     height: 100vh;
     section {
       position: absolute;

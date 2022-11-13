@@ -1,7 +1,7 @@
 export const template = {
-  name: "JC Wang",
+  name: "小润",
   phone: "123-4567-8888",
-  email: "jc.wang@gmail.com",
+  email: "xiaorun@gmail.com",
   workExperience: {
     ct1: {
       title: "高盛集团",
