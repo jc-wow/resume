@@ -30,7 +30,7 @@ export const ContentHead = (props: {
     }, editResult);
     setEditResult(toggle());
   };
-  const [isIconShow, setIconShow] = useState(false);
+  const [isIconShow, setIconShow] = useState<boolean>(false);
 
   return (
     <div

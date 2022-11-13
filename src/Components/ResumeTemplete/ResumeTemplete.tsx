@@ -5,6 +5,7 @@ import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
 import { Info } from "@/Common/Info/info";
 import { nanoid } from "nanoid";
+import { ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
 
 export const ResumeTemplete = (props: {
   editResult: ResumeType;
@@ -26,6 +27,8 @@ export const ResumeTemplete = (props: {
     project: "项目/其他经历",
   });
   const [renderSort, setRenderSort] = useState<string[]>(["education", "workExperience", "project"]);
+  const [mouseOnTemplate, setMouseOnTemplate] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(1.0);
 
   const dragstart_handler = (event: React.DragEvent<HTMLDivElement>): void => {
     event.dataTransfer.setData("text/plain", (event.target as HTMLElement).className);
@@ -78,7 +81,32 @@ export const ResumeTemplete = (props: {
   };
 
   return (
-    <div className="resume-template">
+    <div
+      className="resume-template"
+      onMouseOver={() => {
+        setMouseOnTemplate(true);
+        console.log(mouseOnTemplate);
+      }}
+      onMouseLeave={() => {
+        setMouseOnTemplate(false);
+        console.log(mouseOnTemplate);
+      }}
+      style={{ zoom }}
+    >
+      <div className="zoom-container" style={{ display: mouseOnTemplate ? "block" : "none" }}>
+        <ZoomInOutlined
+          style={{ fontSize: "19px", color: "#1890ff", marginRight: "15px", cursor: "zoom-in" }}
+          onClick={() => {
+            setZoom(zoom + 0.1);
+          }}
+        />
+        <ZoomOutOutlined
+          style={{ fontSize: "19px", color: "#1890ff", cursor: "zoom-out" }}
+          onClick={() => {
+            setZoom(zoom - 0.1);
+          }}
+        />
+      </div>
       <div className={`${name ? "name" : "center"} mb-4`}>
         <Info content={name} editResult={editResult} setEditResult={setEditResult} infoType="name"></Info>
       </div>
