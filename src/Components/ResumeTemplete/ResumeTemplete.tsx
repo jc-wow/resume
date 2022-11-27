@@ -85,11 +85,9 @@ export const ResumeTemplete = (props: {
       className="resume-template"
       onMouseOver={() => {
         setMouseOnTemplate(true);
-        console.log(mouseOnTemplate);
       }}
       onMouseLeave={() => {
         setMouseOnTemplate(false);
-        console.log(mouseOnTemplate);
       }}
       style={{ zoom }}
     >
