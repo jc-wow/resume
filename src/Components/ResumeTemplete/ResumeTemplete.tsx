@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./resumeTemplete.scss";
 import { Expericence } from "@/Components/Parser/Index";
 import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
@@ -21,14 +21,38 @@ export const ResumeTemplete = (props: {
       return experience[ele];
     });
   };
-  const [headContent, setHeadContent] = useState<{ education: string; workExperience: string; project: string }>({
-    workExperience: "工作经历",
-    education: "教育经历",
-    project: "项目/其他经历",
-  });
-  const [renderSort, setRenderSort] = useState<string[]>(["education", "workExperience", "project"]);
+
+  const [headContent, setHeadContent] = useState<{ education: string; workExperience: string; project: string }>(
+    localStorage.getItem("headContent")
+      ? JSON.parse(localStorage.getItem("headContent"))
+      : {
+          workExperience: "工作经历",
+          education: "教育经历",
+          project: "项目/其他经历",
+        }
+  );
+
+  const [renderSort, setRenderSort] = useState<string[]>(
+    localStorage.getItem("renderSort")
+      ? JSON.parse(localStorage.getItem("renderSort"))
+      : ["education", "workExperience", "project"]
+  );
   const [mouseOnTemplate, setMouseOnTemplate] = useState<boolean>(false);
   const [zoom, setZoom] = useState<number>(1.0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      localStorage.setItem("headContent", JSON.stringify(headContent));
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [headContent]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      localStorage.setItem("renderSort", JSON.stringify(renderSort));
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [renderSort]);
 
   const dragstart_handler = (event: React.DragEvent<HTMLDivElement>): void => {
     event.dataTransfer.setData("text/plain", (event.target as HTMLElement).className);

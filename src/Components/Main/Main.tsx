@@ -4,7 +4,6 @@ import { ResumeTemplete } from "../ResumeTemplete/ResumeTemplete";
 import { template } from "@/Constants/Config/resume-config";
 import { View } from "@/Components/TemplateFunctionComponent/View/View";
 import { ResumeType } from "@/Constants/Types/ResumeType";
-import useResumeCache from "@/Hooks/useResumeCache";
 
 export const MainPage = (): JSX.Element => {
   let resumeData: ResumeType = template;
@@ -14,8 +13,8 @@ export const MainPage = (): JSX.Element => {
   const [editResult, setEditResult] = useState<ResumeType>(resumeData);
   useEffect(() => {
     const intervalId = setInterval(() => {
-      useResumeCache(editResult);
-    }, 5000);
+      localStorage.setItem("resumeData", JSON.stringify(editResult));
+    }, 3000);
     return () => clearInterval(intervalId);
   }, [editResult]);
   return (
