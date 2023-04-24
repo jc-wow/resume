@@ -5,7 +5,6 @@ import { ResumeType, ExpericenceContent } from "@/Constants/Types/ResumeType";
 import { ContentHead } from "@/Common/ContentHead/contentHead";
 import { Info } from "@/Common/Info/info";
 import { nanoid } from "nanoid";
-import { ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons";
 
 export const ResumeTemplete = (props: {
   editResult: ResumeType;
@@ -37,8 +36,6 @@ export const ResumeTemplete = (props: {
       ? JSON.parse(localStorage.getItem("renderSort"))
       : ["education", "workExperience", "project"]
   );
-  const [mouseOnTemplate, setMouseOnTemplate] = useState<boolean>(false);
-  const [zoom, setZoom] = useState<number>(1.0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -105,30 +102,7 @@ export const ResumeTemplete = (props: {
   };
 
   return (
-    <div
-      className="resume-template"
-      onMouseOver={() => {
-        setMouseOnTemplate(true);
-      }}
-      onMouseLeave={() => {
-        setMouseOnTemplate(false);
-      }}
-      style={{ zoom }}
-    >
-      {/* <div className="zoom-container" style={{ display: mouseOnTemplate ? "block" : "none" }}>
-        <ZoomInOutlined
-          style={{ fontSize: "19px", color: "#1890ff", marginRight: "15px", cursor: "zoom-in" }}
-          onClick={() => {
-            setZoom(zoom + 0.1);
-          }}
-        />
-        <ZoomOutOutlined
-          style={{ fontSize: "19px", color: "#1890ff", cursor: "zoom-out" }}
-          onClick={() => {
-            setZoom(zoom - 0.1);
-          }}
-        />
-      </div> */}
+    <div className="resume-template">
       <div className={`${name ? "name" : "center"} mb-4`}>
         <Info content={name} editResult={editResult} setEditResult={setEditResult} infoType="name"></Info>
       </div>
