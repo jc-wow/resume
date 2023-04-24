@@ -115,7 +115,7 @@ export const ResumeTemplete = (props: {
       }}
       style={{ zoom }}
     >
-      <div className="zoom-container" style={{ display: mouseOnTemplate ? "block" : "none" }}>
+      {/* <div className="zoom-container" style={{ display: mouseOnTemplate ? "block" : "none" }}>
         <ZoomInOutlined
           style={{ fontSize: "19px", color: "#1890ff", marginRight: "15px", cursor: "zoom-in" }}
           onClick={() => {
@@ -128,7 +128,7 @@ export const ResumeTemplete = (props: {
             setZoom(zoom - 0.1);
           }}
         />
-      </div>
+      </div> */}
       <div className={`${name ? "name" : "center"} mb-4`}>
         <Info content={name} editResult={editResult} setEditResult={setEditResult} infoType="name"></Info>
       </div>
